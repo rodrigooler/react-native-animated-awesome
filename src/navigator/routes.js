@@ -4,7 +4,7 @@ import Slide1 from '../pages/Slide1';
 import Slide2 from '../pages/Slide2';
 import WhoIAm from '../pages/WhoIAm';
 
-export default routes = {
+export default (routes = {
   WhoIAm: {
     screen: WhoIAm,
   },
@@ -14,4 +14,4 @@ export default routes = {
   Slide2: {
     screen: Slide2,
   },
-};
+});

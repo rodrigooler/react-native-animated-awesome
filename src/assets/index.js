@@ -1,1 +1,1 @@
-export getImages from "./images/images";
+export getImages from './images/images';
