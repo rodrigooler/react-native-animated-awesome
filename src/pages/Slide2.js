@@ -1,53 +1,70 @@
-// @flow
+/**
+ * Sample React Native App
+ * https://github.com/facebook/react-native
+ * @flow
+ */
 
-import React from 'react';
-import { Animated, Text, View } from 'react-native';
+import React, { Component } from 'react';
+import {
+  AppRegistry,
+  StyleSheet,
+  Text,
+  View,
+  Animated,
+  Image,
+  Easing,
+} from 'react-native';
 
-class FadeInView extends React.Component {
-  state = {
-    fadeAnim: new Animated.Value(0), // Initial value for opacity: 0
-  };
+const timing = 4000;
 
+class Slide2 extends Component {
+  constructor() {
+    super();
+    this.spinValue = new Animated.Value(0);
+  }
   componentDidMount() {
-    Animated.timing(
-      // Animate over time
-      this.state.fadeAnim, // The animated value to drive
-      {
-        toValue: 1, // Animate to opacity: 1 (opaque)
-        duration: 10000, // Make it take a while
-      },
-    ).start(); // Starts the animation
+    this.spin();
   }
-
-  render() {
-    let { fadeAnim } = this.state;
-
-    return (
-      <Animated.View // Special animatable View
-        style={{
-          ...this.props.style,
-          opacity: fadeAnim, // Bind opacity to animated value
-        }}
-      >
-        {this.props.children}
-      </Animated.View>
-    );
+  spin() {
+    this.spinValue.setValue(0);
+    Animated.timing(this.spinValue, {
+      toValue: 1,
+      duration: timing,
+      easing: Easing.linear,
+    }).start(() => this.spin());
   }
-}
-
-// You can then use your `FadeInView` in place of a `View` in your components:
-export default class App extends React.Component {
   render() {
+    /* This also works, to show functions instead of strings */
+    // const getStartValue = () => '0deg'
+    // const getEndValue = () => '360deg'
+    // const spin = this.spinValue.interpolate({
+    //   inputRange: [0, 1],
+    //   outputRange: [getStartValue(), getEndValue()]
+    // })
+    const spin = this.spinValue.interpolate({
+      inputRange: [0, 1],
+      outputRange: ['0deg', '360deg'],
+    });
     return (
-      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-        <FadeInView
-          style={{ width: 250, height: 50, backgroundColor: 'powderblue' }}
-        >
-          <Text style={{ fontSize: 28, textAlign: 'center', margin: 10 }}>
-            Fading in
-          </Text>
-        </FadeInView>
+      <View style={styles.container}>
+        <Animated.Image
+          style={{ width: 227, height: 200, transform: [{ rotate: spin }] }}
+          source={{
+            uri:
+              'https://s3.amazonaws.com/media-p.slid.es/uploads/alexanderfarennikov/images/1198519/reactjs.png',
+          }}
+        />
       </View>
     );
   }
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+});
+
+export default Slide2;
