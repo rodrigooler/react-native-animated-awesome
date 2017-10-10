@@ -5,11 +5,9 @@ import { StyleSheet, Text, View, Animated, Image, Easing } from 'react-native';
 
 import Unicorn from './Unicorn';
 
-const Wrapper = styled(createAnimatedComponent(Animated.View)).attrs({ width: 227, height: 200, transform: [{ scale: ${props => props.scale} }] })
-
 class UnicornAnimated extends React.Component {
   state = {
-    scale: new Animated.Value(0.6),
+    scale: new Animated.Value(0),
   };
 
   componentDidMount() {
@@ -20,12 +18,12 @@ class UnicornAnimated extends React.Component {
     const { scale } = this.state;
     Animated.sequence([
       Animated.timing(scale, {
-        toValue: 1,
-        duration: 300,
+        toValue: 0.2,
+        duration: 1000,
       }),
       Animated.timing(scale, {
-        toValue: 0.6,
-        duration: 300,
+        toValue: 0.4,
+        duration: 1000,
       }),
     ]).start(() => this.scaleAnimated());
   }
@@ -33,9 +31,21 @@ class UnicornAnimated extends React.Component {
   render() {
     const { scale } = this.state;
 
-    return <Wrapper scale={scale}>
+    return (
+      <Animated.View
+        style={{
+          width: 227,
+          height: 200,
+          transform: [
+            {
+              scale,
+            },
+          ],
+        }}
+      >
         <Unicorn />
-      </Wrapper>;
+      </Animated.View>
+    );
   }
 }
 

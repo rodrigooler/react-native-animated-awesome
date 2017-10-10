@@ -24,13 +24,23 @@
   "jest": {
     "preset": "jest-expo"
   },
+  "lint-staged": {
+    "*.js": [
+      "yarn prettier",
+      "git add"
+    ]
+  },
   "main": "./node_modules/react-native-scripts/build/bin/crna-entry.js",
-  "private": true,
+  "private": false,
   "scripts": {
     "android": "react-native-scripts android",
     "eject": "react-native-scripts eject",
     "ios": "react-native-scripts ios",
+    "precommit": "lint-staged",
+    "prettier": "prettier --write --single-quote true --trailing-comma all --print-width 80",
+    "prettier:all": "prettier --write --single-quote true --trailing-comma all --print-width 80 --write 'src/**/*.js'",
     "start": "react-native-scripts start",
-    "test": "node node_modules/jest/bin/jest.js --watch"
+    "test": "node node_modules/jest/bin/jest.js --watch",
+    "upg": "yarn upgrade-interactive"
   }
 }
