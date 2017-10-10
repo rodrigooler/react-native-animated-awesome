@@ -4,8 +4,8 @@ import resolveAssetSource from 'resolveAssetSource';
 
 const getImage = (name: string) => {
   switch (name) {
-    case 'avatar':
-      return resolveAssetSource(require('../../assets/images/avatar.png'));
+    case 'rodrigooler':
+      return resolveAssetSource(require('./rodrigooler.png'));
     default:
       return null;
   }
