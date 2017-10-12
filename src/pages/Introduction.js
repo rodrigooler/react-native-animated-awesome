@@ -11,7 +11,7 @@ import TitlePage from '../atoms/TitlePage';
 import UnicornAnimated from '../atoms/UnicornAnimated';
 
 import { getImages } from '../assets';
-import theme, { ROUTE_NAMES } from '../themes/default';
+import theme from '../themes/default';
 
 class Introdution extends React.PureComponent {
   nextSlide = () => this.props.navigation.navigate('Slide1');

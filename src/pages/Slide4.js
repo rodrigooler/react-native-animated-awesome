@@ -8,45 +8,40 @@ import {
   View,
   Animated,
   Image,
-  Easing,
 } from 'react-native';
 import { withNavigation } from 'react-navigation';
 
 import Button from '../atoms/Button';
 
-const timing = 4000;
-
-class Slide2 extends React.PureComponent {
+class Slide4 extends React.PureComponent {
   constructor() {
     super();
-    this.spinValue = new Animated.Value(0);
+    this.springValue = new Animated.Value(0.3);
   }
 
-  componentDidMount() {
-    this.spin();
-  }
-
-  spin() {
-    this.spinValue.setValue(0);
-    Animated.timing(this.spinValue, {
+  spring() {
+    this.springValue.setValue(0.3);
+    Animated.spring(this.springValue, {
       toValue: 1,
-      duration: timing,
-      easing: Easing.linear,
-    }).start(() => this.spin());
+      friction: 1,
+      tension: 1,
+    }).start();
   }
 
-  nextSlide = () => this.props.navigation.navigate('Slide3');
+  nextSlide = () => this.props.navigation.navigate('Slide5');
 
   render() {
-    const spin = this.spinValue.interpolate({
-      inputRange: [0, 1],
-      outputRange: ['0deg', '360deg'],
-    });
-
     return (
       <View style={styles.container}>
+        <Text style={{ marginBottom: 100 }} onPress={this.spring.bind(this)}>
+          Spring
+        </Text>
         <Animated.Image
-          style={{ width: 227, height: 200, transform: [{ rotate: spin }] }}
+          style={{
+            width: 227,
+            height: 200,
+            transform: [{ scale: this.springValue }],
+          }}
           source={{
             uri:
               'https://s3.amazonaws.com/media-p.slid.es/uploads/alexanderfarennikov/images/1198519/reactjs.png',
@@ -66,4 +61,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default Slide2;
+export default withNavigation(Slide4);
