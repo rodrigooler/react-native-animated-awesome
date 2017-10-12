@@ -20,11 +20,12 @@ const Wrapper = styled.TouchableOpacity`
 
 type Props = {
   text: string,
+  onPress: Function,
 };
 
-function Button({ text }) {
+function Button({ text, onPress }) {
   return (
-    <Wrapper>
+    <Wrapper onPress={onPress}>
       <Text>{text}</Text>
     </Wrapper>
   );

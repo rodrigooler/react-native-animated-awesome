@@ -1,13 +1,23 @@
 // @flow
 
+import Introduction from '../pages/Introduction';
 import Slide1 from '../pages/Slide1';
 import Slide2 from '../pages/Slide2';
-import WhoIAm from '../pages/WhoIAm';
+
+export const ROUTE_NAMES = {
+  INTRODUCTION: 'Introduction',
+  WHO_I_AM: 'WhoIAm',
+  SLIDE1: 'Slide1',
+  SLIDE2: 'Slide2',
+};
 
 export default (routes = {
-  WhoIAm: {
-    screen: WhoIAm,
+  Introdution: {
+    screen: Introduction,
   },
+  // WhoIAm: {
+  //   screen: WhoIAm,
+  // },
   Slide1: {
     screen: Slide1,
   },
